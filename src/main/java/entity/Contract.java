@@ -1,9 +1,13 @@
 package com.example.demo.entity;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -49,7 +53,7 @@ public class Contract {
         this.createdAt = new Timestamp(System.currentTimeMillis());
     }
 
-    // getters and setters
+    // Getters and setters
     public Long getId() {
         return id;
     }
