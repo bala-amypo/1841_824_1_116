@@ -14,5 +14,16 @@ public class Contract
     private Timestamp createdAT;
     private Timestamp Timestamp;
 
-    
+    //id
+    public void setID(Long id)
+    { this.id=id; }
+    public Long getID()
+    { return id; }
+
+    //contaractNumber
+    public void setcontaractNumber(String contaractNumber)
+    { this.contaractNumber=contaractNumber; }
+    public String getID()
+    { return id; }
+
 }
