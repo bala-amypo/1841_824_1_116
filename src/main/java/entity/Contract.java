@@ -1,44 +1,79 @@
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
-public class Contract
-{
+public class Contract {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true)
-    private String contaractNumber;
+
+    @Column(unique = true, nullable = false)
+    private String contractNumber;
+
     private String title;
     private String counterpartName;
+
+    @Temporal(TemporalType.DATE)
     private Date agreedDeliveryDate;
+
     private BigDecimal baseContractValue;
     private String status;
-    private Timestamp createdAT;
-    private Timestamp Timestamp;
 
-    //id
-    public void setID(Long id)
-    { this.id=id; }
-    public Long getID()
-    { return id; }
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
-    //contaractNumber
-    public void setContaractNumber(String contaractNumber)
-    { this.contaractNumber=contaractNumber; }
-    public String getContaractNumber()
-    { return contaractNumber; }
+    public Contract() {
+    }
 
-    //title
-    public void setTitle(String title)
-    { this.title=title; }
-    public String getTitle()
-    { return title; }
+    public Contract(String contractNumber,
+                    String title,
+                    String counterpartName,
+                    Date agreedDeliveryDate,
+                    BigDecimal baseContractValue,
+                    String status) {
 
-    //counterpartName
-    public void setCounterpartName(String counterpartName)
-    { this.counterpartName=counterpartName; }
-    public String getCounterpartName()
-    { return counterpartName; }
+        this.contractNumber = contractNumber;
+        this.title = title;
+        this.counterpartName = counterpartName;
+        this.agreedDeliveryDate = agreedDeliveryDate;
+        this.baseContractValue = baseContractValue;
+        this.status = status;
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+    }
 
-    
+    // getters and setters
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public String getContractNumber() {
+        return contractNumber;
+    }
+
+    public void setContractNumber(String contractNumber) {
+        this.contractNumber = contractNumber;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCounterpartName() {
+        return counterpartName;
+    }
+
+    public void setCounterpartName(String counterpartName) {
+        this.counterpartName = counterpartName;
+    }
 }
