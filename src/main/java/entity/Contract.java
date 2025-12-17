@@ -21,9 +21,24 @@ public class Contract
     { return id; }
 
     //contaractNumber
-    public void setcontaractNumber(String contaractNumber)
+    public void setContaractNumber(String contaractNumber)
     { this.contaractNumber=contaractNumber; }
-    public String getID()
-    { return id; }
+    public String getContaractNumber()
+    { return contaractNumber; }
+
+    //title
+    public void setTitle(String title)
+    { this.title=title; }
+    public String getTitle()
+    { return title; }
+
+    //counterpartName
+    public void setCounterpartName(String counterpartName)
+    { this.counterpartName=counterpartName; }
+    public String getCounterpartName()
+    { return counterpartName; }
+
+    
+
 
 }
