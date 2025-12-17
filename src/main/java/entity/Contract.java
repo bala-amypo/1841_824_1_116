@@ -8,5 +8,11 @@ public class Contract
     private String contaractNumber;
     private String title;
     private String counterpartName;
-    private 
+    private Date agreedDeliveryDate;
+    private BigDecimal baseContractValue;
+    private String status;
+    private Timestamp createdAT;
+    private Timestamp Timestamp;
+
+    
 }
