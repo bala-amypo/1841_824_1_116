@@ -13,11 +13,9 @@ public class User {
     private  Long id;
     @Column(unique=true)
     private String email;
+    private String password;
 
-@JsonIgnore
-private String password;
-
-    @ElementCollection(fetch = FetchType.EAGER)
+@ElementCollection(fetch = FetchType.EAGER)
 @CollectionTable(
     name = "user_roles",
     joinColumns = @JoinColumn(name = "user_id")
