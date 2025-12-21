@@ -1,7 +1,6 @@
 package com.example.demo.service;
-import com.example.demo.entity.C;
+import com.example.demo.entity.Contract;
 
-public interface  UserService { 
-    public void registerUser(String email,String password);
-    User getUserByEmail(String email);
+public interface  ContractService { 
+    Contract 
 }
