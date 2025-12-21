@@ -12,10 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(
-    name = "contracts",
-    uniqueConstraints = @UniqueConstraint(columnNames = "contractNumber")
-)
 @Getter
 @Setter
 @NoArgsConstructor
