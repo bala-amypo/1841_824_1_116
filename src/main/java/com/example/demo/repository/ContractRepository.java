@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.entity.User;
 
 @Repository
-public interface  ContractRepository extends JpaRepository<User, Long> {
+public interface ContractRepository extends JpaRepository<Contract, Long> {
 }
