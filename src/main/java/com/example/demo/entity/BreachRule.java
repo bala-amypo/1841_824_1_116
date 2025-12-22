@@ -66,7 +66,7 @@ public BigDecimal getMaxPenaltyPercentage() {
     return maxPenaltyPercentage;
 }
 
-public void setMaxPenaltyPercentage(BigDecimal maxPenaltyPercentage) {
+public void setMaxPenaltyPercentage(Double maxPenaltyPercentage) {
     this.maxPenaltyPercentage = maxPenaltyPercentage;
 }
 
