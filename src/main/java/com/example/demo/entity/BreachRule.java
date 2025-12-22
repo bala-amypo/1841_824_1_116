@@ -62,7 +62,7 @@ public void setPenaltyPerDay(BigDecimal penaltyPerDay) {
     this.penaltyPerDay = penaltyPerDay;
 }
 
-public BigDecimal getMaxPenaltyPercentage() {
+public double getMaxPenaltyPercentage() {
     return maxPenaltyPercentage;
 }
 
