@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 public class BreachReport {
 
@@ -40,5 +38,52 @@ public class BreachReport {
         this.reportStatus = "GENERATED";
         this.generatedAt = LocalDateTime.now();
     }
+public Long getId() {
+    return id;
+}
+
+public void setId(Long id) {
+    this.id = id;
+}
+
+public Contract getContract() {
+    return contract;
+}
+
+public void setContract(Contract contract) {
+    this.contract = contract;
+}
+
+public Integer getDaysDelayed() {
+    return daysDelayed;
+}
+
+public void setDaysDelayed(Integer daysDelayed) {
+    this.daysDelayed = daysDelayed;
+}
+
+public BigDecimal getPenaltyAmount() {
+    return penaltyAmount;
+}
+
+public void setPenaltyAmount(BigDecimal penaltyAmount) {
+    this.penaltyAmount = penaltyAmount;
+}
+
+public String getReportStatus() {
+    return reportStatus;
+}
+
+public void setReportStatus(String reportStatus) {
+    this.reportStatus = reportStatus;
+}
+
+public LocalDateTime getGeneratedAt() {
+    return generatedAt;
+}
+
+public void setGeneratedAt(LocalDateTime generatedAt) {
+    this.generatedAt = generatedAt;
+}
 
 }

@@ -19,9 +19,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-
-@Getter
-@Setter
 @NoArgsConstructor
 public class Contract {
 
@@ -65,6 +62,69 @@ public class Contract {
         this.updatedAt = updatedAt;
     }
 
-    
+    public Long getId() {
+    return id;
+}
+
+public void setId(Long id) {
+    this.id = id;
+}
+
+public String getTitle() {
+    return title;
+}
+
+public void setTitle(String title) {
+    this.title = title;
+}
+
+public String getCounterpartyName() {
+    return counterpartyName;
+}
+
+public void setCounterpartyName(String counterpartyName) {
+    this.counterpartyName = counterpartyName;
+}
+
+public LocalDate getAgreedDeliveryDate() {
+    return agreedDeliveryDate;
+}
+
+public void setAgreedDeliveryDate(LocalDate agreedDeliveryDate) {
+    this.agreedDeliveryDate = agreedDeliveryDate;
+}
+
+public BigDecimal getBaseContractValue() {
+    return baseContractValue;
+}
+
+public void setBaseContractValue(BigDecimal baseContractValue) {
+    this.baseContractValue = baseContractValue;
+}
+
+public ContractStatus getStatus() {
+    return status;
+}
+
+public void setStatus(ContractStatus status) {
+    this.status = status;
+}
+
+public LocalDateTime getCreatedAt() {
+    return createdAt;
+}
+
+public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+}
+
+public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+}
+
+public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+}
+
 }
 
