@@ -29,7 +29,7 @@ public class Contract {
     private LocalDate agreedDeliveryDate;
 
     @Column(nullable = false, precision = 15, scale = 2)
-    @min(0)
+    @Min(0)
     private BigDecimal baseContractValue;
 
     @Enumerated(EnumType.STRING)
