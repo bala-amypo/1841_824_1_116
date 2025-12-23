@@ -15,7 +15,7 @@ import com.example.demo.service.ContractService;
 public class ContractServiceImpl implements ContractService {
 
     @Autowired
-    private ContractRepository contractRepository;
+    ContractRepository contractRepositoryObj;
 
     @Override
     public Contract createContract(Contract contract) {
@@ -23,12 +23,12 @@ public class ContractServiceImpl implements ContractService {
         contract.setStatus(ContractStatus.ACTIVE);
         contract.setCreatedAt(LocalDateTime.now());
         contract.setUpdatedAt(LocalDateTime.now());
-        return contractRepository.save(contract);
+        return contractRepositoryObj.save(contract);
     }
 
     @Override
     public Contract updateContract(Long id, Contract contract) {
-        Contract existing = contractRepository.findById(id)
+        Contract existing = contractRepositoryObj.findById(id)
                 .orElseThrow(() -> new RuntimeException("Contract not found"));
 
         existing.setTitle(contract.getTitle());
@@ -37,27 +37,27 @@ public class ContractServiceImpl implements ContractService {
         existing.setBaseContractValue(contract.getBaseContractValue());
         existing.setUpdatedAt(LocalDateTime.now());
 
-        return contractRepository.save(existing);
+        return contractRepositoryObj.save(existing);
     }
 
     @Override
     public Contract getContractById(Long id) {
-        return contractRepository.findById(id)
+        return contractRepositoryObj.findById(id)
                 .orElseThrow(() -> new RuntimeException("Contract not found"));
     }
 
     @Override
     public List<Contract> getAllContracts() {
-        return contractRepository.findAll();
+        return contractRepositoryObj.findAll();
     }
 
     @Override
     public void updateContractStatus(Long id) {
-        Contract contract = contractRepository.findById(id)
+        Contract contract = contractRepositoryObj.findById(id)
                 .orElseThrow(() -> new RuntimeException("Contract not found"));
 
         contract.setStatus(ContractStatus.COMPLETED);
         contract.setUpdatedAt(LocalDateTime.now());
-        contractRepository.save(contract);
+        contractRepositoryObj.save(contract);
     }
 }
