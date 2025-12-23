@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 import com.example.demo.entity.enum_files.ContractStatus;
 
+import jakarta.validation.constraints.Min;
 import jakarta.persistence.*;
 
 @Entity
