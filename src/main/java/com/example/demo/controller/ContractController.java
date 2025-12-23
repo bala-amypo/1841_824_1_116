@@ -18,7 +18,7 @@ public class ContractController {
     ContractService contractServiceObj;
 
     @PostMapping
-    public Contract createContract(@Valid @RequestBody Contract contract) {
+    public Contract createContract(@RequestBody Contract contract) {
         return contractServiceObj.createContract(contract);
     }
     @PutMapping("/{id}")
