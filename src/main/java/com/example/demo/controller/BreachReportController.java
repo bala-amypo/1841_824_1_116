@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entity.BreachReport;
 import com.example.demo.service.BreachReportService;
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/breach-reports")

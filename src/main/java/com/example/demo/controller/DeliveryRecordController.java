@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entity.DeliveryRecord;
 import com.example.demo.service.DeliveryRecordService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/delivery-records")

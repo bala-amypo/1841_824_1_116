@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entity.BreachRule;
 import com.example.demo.service.BreachRuleService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/breach-rules")

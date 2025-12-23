@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entity.Contract;
 import com.example.demo.service.ContractService;
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/contracts")
@@ -16,7 +18,7 @@ public class ContractController {
     ContractService contractServiceObj;
 
     @PostMapping
-    public Contract createContract(@RequestBody Contract contract) {
+    public Contract createContract(@Valid @RequestBody Contract contract) {
         return contractServiceObj.createContract(contract);
     }
     @PutMapping("/{id}")
@@ -28,7 +30,7 @@ public class ContractController {
 
 
     @GetMapping("/{id}")
-    public Contract getContractById(@PathVariable Long id) {
+    public Contract getContractById(@Valid @PathVariable Long id) {
         return contractServiceObj.getContractById(id);
     }
 
