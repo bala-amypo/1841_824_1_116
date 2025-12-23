@@ -7,8 +7,8 @@ import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 
 @RestController
-@RequestMapping("/auth")
-public class AuthController {
+@RequestMapping("/user")
+public class UserController {
 
     @Autowired
     private UserService userSerObj;
