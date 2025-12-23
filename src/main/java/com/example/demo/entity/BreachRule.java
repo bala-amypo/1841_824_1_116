@@ -2,6 +2,8 @@
 package com.example.demo.entity;
 import java.math.BigDecimal;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,9 +25,12 @@ public class BreachRule {
     private String ruleName; 
 
     @Column(nullable = false)
+    @Min(0)
     private BigDecimal penaltyPerDay; 
 
     @Column(nullable = false)
+    @Min(0)
+    @Max(100)
     private Double maxPenaltyPercentage;
 
     @Column(nullable = false)
