@@ -19,7 +19,7 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public Contract createContract(Contract contract) {
-        contract.setContractNumber("CNT-" + System.currentTimeMillis()); // ✅ IMPORTANT
+        contract.setContractNumber("CNT-" + contract.getContractNumber()); 
         contract.setStatus(ContractStatus.ACTIVE);
         contract.setCreatedAt(LocalDateTime.now());
         contract.setUpdatedAt(LocalDateTime.now());
