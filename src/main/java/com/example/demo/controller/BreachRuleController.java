@@ -13,20 +13,20 @@ import com.example.demo.service.BreachRuleService;
 public class BreachRuleController {
 
     @Autowired
-    private BreachRuleService breachRuleService;
+    private BreachRuleService breachRuleServiceObj;
 
     @PostMapping("/")
     public BreachRule createRule(@RequestBody BreachRule rule) {
-        return breachRuleService.createRule(rule);
+        return breachRuleServiceObj.createRule(rule);
     }
 
     @PutMapping("/{id}")
     public BreachRule updateRule(@PathVariable Long id, @RequestBody BreachRule rule) {
-        return breachRuleService.updateRule(id, rule);
+        return breachRuleServiceObj.updateRule(id, rule);
     }
 
     public BreachRule getRuleById(@PathVariable Long id) {
-        return breachRuleService.getAllRules()
+        return breachRuleServiceObj.getAllRules()
                 .stream()
                 .filter(r -> r.getId().equals(id))
                 .findFirst()
@@ -35,11 +35,11 @@ public class BreachRuleController {
 
     @GetMapping("/")
     public List<BreachRule> getAllRules() {
-        return breachRuleService.getAllRules();
+        return breachRuleServiceObj.getAllRules();
     }
 
     @PutMapping("/{id}/deactivate")
     public void deactivateRule(@PathVariable Long id) {
-        breachRuleService.deactivateRule(id);
+        breachRuleServiceObj.deactivateRule(id);
     }
 }
