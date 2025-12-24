@@ -10,7 +10,7 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-		System.out.println(new BCryptPasswordEncoder());
+		System.out.println(new BCryptPasswordEncoder().encode("123456"));
 	}
 
 }
