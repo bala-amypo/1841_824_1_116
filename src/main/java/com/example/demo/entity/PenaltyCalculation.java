@@ -51,8 +51,18 @@
 
 // }
 
+package com.example.demo.entity;
+
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Entity
 public class PenaltyCalculation {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     private Contract contract;
@@ -60,7 +70,9 @@ public class PenaltyCalculation {
     private Integer daysDelayed;
     private BigDecimal calculatedPenalty;
 
-    public PenaltyCalculation() {} // ✅ REQUIRED
+    private LocalDateTime calculatedAt = LocalDateTime.now();
+
+    public PenaltyCalculation() {}
 
     public Contract getContract() {
         return contract;
@@ -73,4 +85,17 @@ public class PenaltyCalculation {
     public BigDecimal getCalculatedPenalty() {
         return calculatedPenalty;
     }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
+    }
+
+    public void setDaysDelayed(Integer daysDelayed) {
+        this.daysDelayed = daysDelayed;
+    }
+
+    public void setCalculatedPenalty(BigDecimal calculatedPenalty) {
+        this.calculatedPenalty = calculatedPenalty;
+    }
 }
+
