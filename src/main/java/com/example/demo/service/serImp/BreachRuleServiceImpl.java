@@ -1,57 +1,38 @@
-package com.example.demo.service.serImp;
-
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+// package com.example.demo.service.impl;
 
 import com.example.demo.entity.BreachRule;
 import com.example.demo.repository.BreachRuleRepository;
-import com.example.demo.service.BreachRuleService;
 
-@Service
-public class BreachRuleServiceImpl implements BreachRuleService {
+import java.util.List;
 
-    @Autowired
-    BreachRuleRepository BreachRepoObj;
+public class BreachRuleServiceImpl {
 
-    @Override
-    public BreachRule createRule(BreachRule rule) {
-        return BreachRepoObj.save(rule);
-    }
+    BreachRuleRepository breachRuleRepository;
 
-    @Override
-    public BreachRule updateRule(Long id, BreachRule rule) {
-        Optional<BreachRule> existing = BreachRepoObj.findById(id);
-        if (existing.isPresent()) {
-            BreachRule r = existing.get();
-            r.setRuleName(rule.getRuleName());
-            r.setPenaltyPerDay(rule.getPenaltyPerDay());
-            r.setMaxPenaltyPercentage(rule.getMaxPenaltyPercentage());
-            r.setActive(rule.getActive() != null ? rule.getActive() : true);
-            return BreachRepoObj.save(r);
+    public BreachRule createRule(BreachRule r) {
+        if (r.getPenaltyPerDay().signum() <= 0) {
+            throw new IllegalArgumentException("Penalty must be > 0");
         }
-        return null;
+        if (r.getMaxPenaltyPercentage() > 100) {
+            throw new IllegalArgumentException("Invalid percentage");
+        }
+        return breachRuleRepository.save(r);
     }
 
-    @Override
-    public BreachRule getActiveDefaultOrFirst() {
-        List<BreachRule> activeRules = BreachRepoObj.findByActiveTrueOrderByIdAsc();
-        return activeRules.isEmpty() ? null : activeRules.get(0);
-    }
-
-    @Override
-    public List<BreachRule> getAllRules() {
-        return BreachRepoObj.findAll();
-    }
-
-    @Override
     public void deactivateRule(Long id) {
-        Optional<BreachRule> existing = BreachRepoObj.findById(id);
-        existing.ifPresent(r -> {
-            r.setActive(false);
-            BreachRepoObj.save(r);
-        });
+        BreachRule r = breachRuleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Rule not found"));
+        r.setActive(false);
+        breachRuleRepository.save(r);
+    }
+
+    public BreachRule getActiveDefaultOrFirst() {
+        return breachRuleRepository
+                .findFirstByActiveTrueOrderByIsDefaultRuleDesc()
+                .orElseThrow(() -> new RuntimeException("No active breach rule"));
+    }
+
+    public List<BreachRule> getAllRules() {
+        return breachRuleRepository.findAll();
     }
 }
