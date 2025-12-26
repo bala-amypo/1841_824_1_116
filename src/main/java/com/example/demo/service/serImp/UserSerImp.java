@@ -5,8 +5,11 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Set;
 
+@Service   // ✅ THIS IS THE KEY FIX
 public class UserSerImp implements UserService {
 
     private final UserRepository userRepository;
@@ -18,7 +21,7 @@ public class UserSerImp implements UserService {
     @Override
     public void registerUser(String email, String password) {
 
-        User user = new User();   // ✅ NO builder
+        User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         user.setRoles(Set.of("USER"));
