@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class UserDto {
+public class UserData {
     private Long id;
     private String email;
 }
