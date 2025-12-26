@@ -34,6 +34,8 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 
+import java.util.Set;
+
 public class UserSerImp implements UserService {
 
     private final UserRepository userRepository;
@@ -42,12 +44,26 @@ public class UserSerImp implements UserService {
         this.userRepository = userRepository;
     }
 
+    // ✅ REQUIRED by UserService interface
+    @Override
+    public void registerUser(String email, String password) {
+
+        User user = User.builder()
+                .email(email)
+                .password(password)
+                .roles(Set.of("USER"))
+                .build();
+
+        userRepository.save(user);
+    }
+
+    // ✅ REQUIRED by UserService interface
     @Override
     public User getUserByEmail(String email) {
 
         return userRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("User not found with email: " + email));
+                        new ResourceNotFoundException(
+                                "User not found with email: " + email));
     }
 }
-
