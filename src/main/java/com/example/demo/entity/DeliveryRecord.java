@@ -57,4 +57,30 @@ public class DeliveryRecord {
     private Contract contract;
 
     private LocalDate deliveryDate;
+
+    public DeliveryRecord() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public LocalDate getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
+    }
+
+    public void setDeliveryDate(LocalDate deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
 }
