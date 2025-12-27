@@ -7,33 +7,30 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entity.BreachReport;
 import com.example.demo.service.BreachReportService;
-import jakarta.validation.Valid;
-
 
 @RestController
-@RequestMapping("/api/breach-reports")
 public class BreachReportController {
 
     @Autowired
-    private BreachReportService breachReportService;
+    BreachReportService service;
 
-    @PostMapping("/contract/{contractId}")
+    @PostMapping("/api/reports/generate/{contractId}")
     public BreachReport generateReport(@PathVariable Long contractId) {
-        return breachReportService.generateReport(contractId);
+        return service.generateReport(contractId);
     }
 
-    @GetMapping("/{id}")
-    public BreachReport getReportById(@PathVariable Long id) {
-        return breachReportService.getReportById(id);
+    @GetMapping("/api/reports/{id}")
+    public BreachReport getReport(@PathVariable Long id) {
+        return service.getReportById(id);
     }
 
-    @GetMapping("/contract/{contractId}")
-    public List<BreachReport> getReportsForContract(@PathVariable Long contractId) {
-        return breachReportService.getReportsForContract(contractId);
+    @GetMapping("/api/reports/contract/{contractId}")
+    public java.util.List<BreachReport> getReportsForContract(@PathVariable Long contractId) {
+        return service.getReportsForContract(contractId);
     }
 
-    @GetMapping("/")
+    @GetMapping("/api/reports/")
     public List<BreachReport> getAllReports() {
-        return breachReportService.getAllReports();
+        return service.getAllReports();
     }
 }

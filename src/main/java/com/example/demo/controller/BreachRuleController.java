@@ -3,44 +3,45 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.BreachRule;
 import com.example.demo.service.BreachRuleService;
-import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
-@RequestMapping("/api/breach-rules")
 public class BreachRuleController {
-
     @Autowired
-    private BreachRuleService breachRuleServiceObj;
+    BreachRuleService serv;
 
-    @PostMapping("/")
-    public BreachRule createRule(@RequestBody BreachRule rule) {
-        return breachRuleServiceObj.createRule(rule);
+    @PostMapping("/api/breach-rules")
+    public BreachRule createRule(@RequestBody BreachRule entity) {
+        return serv.createRule(entity);
+    }
+    
+    @PutMapping("/api/breach-rules/{id}")
+    public BreachRule updateRule(@PathVariable Long id, @RequestBody BreachRule entity) {
+        return serv.updateRule(id, entity);
     }
 
-    @PutMapping("/{id}")
-    public BreachRule updateRule(@PathVariable Long id, @RequestBody BreachRule rule) {
-        return breachRuleServiceObj.updateRule(id, rule);
-    }
-
+    @GetMapping("/api/breach-rules/{id}")
     public BreachRule getRuleById(@PathVariable Long id) {
-        return breachRuleServiceObj.getAllRules()
-                .stream()
-                .filter(r -> r.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        return serv.getRuleById(id);
     }
 
-    @GetMapping("/")
-    public List<BreachRule> getAllRules() {
-        return breachRuleServiceObj.getAllRules();
+    @GetMapping("/api/breach-rules/")
+    public List<BreachRule> getAll() {
+        return serv.getAllRules();
     }
-
-    @PutMapping("/{id}/deactivate")
-    public void deactivateRule(@PathVariable Long id) {
-        breachRuleServiceObj.deactivateRule(id);
+    
+    @PutMapping("/api/breach-rules/{id}/deactivate")
+    public BreachRule deactivateRuleById(@PathVariable Long id) {
+        return serv.deactivateRule(id);
     }
+    
 }
