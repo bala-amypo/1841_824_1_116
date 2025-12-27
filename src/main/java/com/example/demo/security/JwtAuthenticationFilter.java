@@ -1,14 +1,19 @@
 package com.example.demo.security;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
 
-public class JwtAuthenticationFilter extends GenericFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter{
 
-    @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-            throws IOException, ServletException {
-        chain.doFilter(req, res);
-    }
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+		// minimal filter: just continue the chain
+		filterChain.doFilter(request, response);
+	}
+
 }

@@ -1,48 +1,23 @@
-// // // package com.example.demo.repository;
-
-// // import com.example.demo.entity.DeliveryRecord;
-// // import org.springframework.data.jpa.repository.JpaRepository;
-
-// // import java.util.List;
-// // import java.util.Optional;
-
-// // public interface DeliveryRecordRepository
-// //         extends JpaRepository<DeliveryRecord, Long> {
-
-// //     Optional<DeliveryRecord>
-// //     findFirstByContractIdOrderByDeliveryDateDesc(Long contractId);
-
-// //     List<DeliveryRecord>
-// //     findByContractIdOrderByDeliveryDateAsc(Long contractId);
-// // }
-// package com.example.demo.repository;
-
-// import com.example.demo.entity.DeliveryRecord;
-// import org.springframework.data.jpa.repository.JpaRepository;
-
-// import java.util.List;
-// import java.util.Optional;
-
-// public interface DeliveryRecordRepository
-//         extends JpaRepository<DeliveryRecord, Long> {
-
-//     Optional<DeliveryRecord> findFirstByContractIdOrderByDeliveryDateDesc(Long contractId);
-
-//     List<DeliveryRecord> findByContractIdOrderByDeliveryDateAsc(Long contractId);
-// }
 package com.example.demo.repository;
 
-import com.example.demo.entity.DeliveryRecord;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-import java.util.Optional;
+import com.example.demo.entity.DeliveryRecord;
+import org.springframework.stereotype.Repository;
 
-public interface DeliveryRecordRepository extends JpaRepository<DeliveryRecord, Long> {
+@Repository
+public interface DeliveryRecordRepository extends JpaRepository<DeliveryRecord , Long>{
 
-    Optional<DeliveryRecord> findFirstByContractIdOrderByDeliveryDateDesc(Long contractId);
+    List<DeliveryRecord> findAllByContractId(Long contractId);
 
-    List<DeliveryRecord> findByContractIdOrderByDeliveryDateAsc(Long contractId);
+    DeliveryRecord findByContractId(Long contractId);
+
+    DeliveryRecord findTopByContractIdOrderByDeliveryDateDesc(Long contractId);
+
+    java.util.Optional<DeliveryRecord> findFirstByContractIdOrderByDeliveryDateDesc(Long contractId);
+
+    java.util.List<DeliveryRecord> findByContractIdOrderByDeliveryDateAsc(Long contractId);
+
 }
-
-
