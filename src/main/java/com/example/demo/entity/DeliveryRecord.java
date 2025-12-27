@@ -41,26 +41,20 @@
 //     private LocalDateTime createdAt;
 // }
 
+package com.example.demo.entity;
+
+import jakarta.persistence.*;
+import java.time.LocalDate;
+
 @Entity
-public class PenaltyCalculation {
+public class DeliveryRecord {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     private Contract contract;
 
-    private Integer daysDelayed;
-    private BigDecimal calculatedPenalty;
-
-    public PenaltyCalculation() {} // ✅ REQUIRED
-
-    public Contract getContract() {
-        return contract;
-    }
-
-    public Integer getDaysDelayed() {
-        return daysDelayed;
-    }
-
-    public BigDecimal getCalculatedPenalty() {
-        return calculatedPenalty;
-    }
+    private LocalDate deliveryDate;
 }

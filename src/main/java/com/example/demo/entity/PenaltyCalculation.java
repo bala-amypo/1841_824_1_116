@@ -55,7 +55,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 public class PenaltyCalculation {
@@ -69,33 +69,7 @@ public class PenaltyCalculation {
 
     private Integer daysDelayed;
     private BigDecimal calculatedPenalty;
-
-    private LocalDateTime calculatedAt = LocalDateTime.now();
-
-    public PenaltyCalculation() {}
-
-    public Contract getContract() {
-        return contract;
-    }
-
-    public Integer getDaysDelayed() {
-        return daysDelayed;
-    }
-
-    public BigDecimal getCalculatedPenalty() {
-        return calculatedPenalty;
-    }
-
-    public void setContract(Contract contract) {
-        this.contract = contract;
-    }
-
-    public void setDaysDelayed(Integer daysDelayed) {
-        this.daysDelayed = daysDelayed;
-    }
-
-    public void setCalculatedPenalty(BigDecimal calculatedPenalty) {
-        this.calculatedPenalty = calculatedPenalty;
-    }
+    private Instant calculatedAt;
 }
+
 
