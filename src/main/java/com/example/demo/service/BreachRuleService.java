@@ -4,10 +4,12 @@ import java.util.List;
 
 import com.example.demo.entity.BreachRule;
 
-public interface BreachRuleService  {
+public interface BreachRuleService {
     public BreachRule createRule(BreachRule rule);
-    public BreachRule updateRule(Long id, BreachRule rule);
-    public BreachRule getActiveDefaultOrFirst();
+    public BreachRule updateRule(Long id , BreachRule rule);
     public List<BreachRule> getAllRules();
-    public void deactivateRule(Long id);
+    public BreachRule getRuleById(Long Id);
+    public BreachRule deactivateRule(Long id);
+    public BreachRule getActiveDefaultOrFirst();
+    // public BreachRule getActiveDefaultOrFirst();
 }
