@@ -1,9 +1,7 @@
 package com.example.demo.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter @Setter
 public class DeliveryRecordDto {
     private String notes;
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
 }
