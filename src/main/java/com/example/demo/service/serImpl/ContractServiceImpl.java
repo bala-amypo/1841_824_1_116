@@ -61,53 +61,72 @@
 //         contractRepositoryObj.save(contract);
 //     }
 // }
+
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.Contract;
+import com.example.demo.entity.DeliveryRecord;
+import com.example.demo.entity.enum_files.ContractStatus;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.ContractRepository;
 import com.example.demo.repository.DeliveryRecordRepository;
+import com.example.demo.service.ContractService;
 
+import java.time.LocalDate;
 import java.util.List;
 
-public class ContractServiceImpl {
+public class ContractServiceImpl implements ContractService {
 
-    ContractRepository contractRepository;
-    DeliveryRecordRepository deliveryRecordRepository;
+    private ContractRepository contractRepository;
+    private DeliveryRecordRepository deliveryRecordRepository;
 
-    public Contract createContract(Contract c) {
-        if (c.getBaseContractValue().signum() <= 0) {
-            throw new IllegalArgumentException("Base contract value must be > 0");
+    @Override
+    public Contract createContract(Contract contract) {
+        if (contract.getBaseContractValue().signum() <= 0) {
+            throw new IllegalArgumentException("Base contract value must be positive");
         }
-        return contractRepository.save(c);
+        contract.setStatus(ContractStatus.ACTIVE);
+        return contractRepository.save(contract);
     }
 
+    @Override
     public Contract getContractById(Long id) {
         return contractRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Contract not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Contract not found"));
     }
 
+    @Override
     public List<Contract> getAllContracts() {
         return contractRepository.findAll();
     }
 
-    public Contract updateContract(Long id, Contract u) {
+    @Override
+    public Contract updateContract(Long id, Contract updated) {
         Contract c = getContractById(id);
-        c.setTitle(u.getTitle());
-        c.setCounterpartyName(u.getCounterpartyName());
-        c.setAgreedDeliveryDate(u.getAgreedDeliveryDate());
-        c.setBaseContractValue(u.getBaseContractValue());
+        c.setTitle(updated.getTitle());
+        c.setCounterpartyName(updated.getCounterpartyName());
+        c.setAgreedDeliveryDate(updated.getAgreedDeliveryDate());
+        c.setBaseContractValue(updated.getBaseContractValue());
         return contractRepository.save(c);
     }
 
+    @Override
     public void updateContractStatus(Long id) {
         Contract c = getContractById(id);
+
         deliveryRecordRepository
                 .findFirstByContractIdOrderByDeliveryDateDesc(id)
-                .ifPresent(dr -> {
-                    if (dr.getDeliveryDate().isAfter(c.getAgreedDeliveryDate())) {
-                        c.setStatus("BREACHED");
-                    }
-                });
+                .ifPresentOrElse(
+                        r -> {
+                            if (r.getDeliveryDate().isAfter(c.getAgreedDeliveryDate())) {
+                                c.setStatus(ContractStatus.BREACHED);
+                            } else {
+                                c.setStatus(ContractStatus.ACTIVE);
+                            }
+                        },
+                        () -> c.setStatus(ContractStatus.ACTIVE)
+                );
+
         contractRepository.save(c);
     }
 }

@@ -68,8 +68,50 @@ public class PenaltyCalculation {
     private Contract contract;
 
     private Integer daysDelayed;
+
     private BigDecimal calculatedPenalty;
+
     private Instant calculatedAt;
+
+    public PenaltyCalculation() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public Integer getDaysDelayed() {
+        return daysDelayed;
+    }
+
+    public BigDecimal getCalculatedPenalty() {
+        return calculatedPenalty;
+    }
+
+    public Instant getCalculatedAt() {
+        return calculatedAt;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
+    }
+
+    public void setDaysDelayed(Integer daysDelayed) {
+        this.daysDelayed = daysDelayed;
+    }
+
+    public void setCalculatedPenalty(BigDecimal calculatedPenalty) {
+        this.calculatedPenalty = calculatedPenalty;
+    }
+
+    public void setCalculatedAt(Instant calculatedAt) {
+        this.calculatedAt = calculatedAt;
+    }
 }
-
-
