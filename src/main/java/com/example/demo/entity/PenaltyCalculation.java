@@ -1,117 +1,111 @@
-// package com.example.demo.entity;
-
-// import java.math.BigDecimal;
-// import java.time.LocalDateTime;
-
-// import jakarta.persistence.*;
-// import lombok.Getter;
-// import lombok.NoArgsConstructor;
-// import lombok.Setter;
-
-// @Entity
-// @Getter
-// @Setter
-// @NoArgsConstructor
-// @Table(name = "penalty_calculation")
-// public class PenaltyCalculation {
-
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//     private Long id; 
-//     @ManyToOne(optional = false)
-//     @JoinColumn(name = "contract_id", nullable = false)
-//     private Contract contract; 
-
-//     @ManyToOne
-//     @JoinColumn(name = "delivery_record_id")
-//     private DeliveryRecord deliveryRecord; 
-
-//     @ManyToOne(optional = false)
-//     @JoinColumn(name = "breach_rule_id", nullable = false)
-//     private BreachRule breachRule; 
-
-//     @Column(nullable = false)
-//     private Integer daysDelayed; 
-
-//     @Column(nullable = false)
-//     private BigDecimal calculatedPenalty; 
-
-//     @Column(nullable = false, updatable = false)
-//     private LocalDateTime calculatedAt; 
-
-//     public PenaltyCalculation(Contract contract, DeliveryRecord deliveryRecord, BreachRule breachRule,
-//                               Integer daysDelayed, BigDecimal calculatedPenalty) {
-//         this.contract = contract;
-//         this.deliveryRecord = deliveryRecord;
-//         this.breachRule = breachRule;
-//         this.daysDelayed = daysDelayed;
-//         this.calculatedPenalty = calculatedPenalty;
-//         this.calculatedAt = LocalDateTime.now();
-//     }
-
-// }
-
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "penalty_calculations")
 public class PenaltyCalculation {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
     private Contract contract;
-
+    
     private Integer daysDelayed;
-
     private BigDecimal calculatedPenalty;
+    
+    @ManyToOne
+    private BreachRule appliedRule;
 
-    private Instant calculatedAt;
+    private LocalDateTime calculatedAt;
 
-    public PenaltyCalculation() {}
+    public PenaltyCalculation() {
+    }
+
+    public PenaltyCalculation(Contract contract, Integer daysDelayed, 
+                            BigDecimal calculatedPenalty, BreachRule appliedRule) {
+        this.contract = contract;
+        this.daysDelayed = daysDelayed;
+        this.calculatedPenalty = calculatedPenalty;
+        this.appliedRule = appliedRule;
+        this.calculatedAt = LocalDateTime.now();
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public Contract getContract() {
-        return contract;
-    }
-
-    public Integer getDaysDelayed() {
-        return daysDelayed;
-    }
-
-    public BigDecimal getCalculatedPenalty() {
-        return calculatedPenalty;
-    }
-
-    public Instant getCalculatedAt() {
-        return calculatedAt;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public Contract getContract() {
+        return contract;
+    }
+
     public void setContract(Contract contract) {
         this.contract = contract;
+    }
+
+    public Integer getDaysDelayed() {
+        return daysDelayed;
     }
 
     public void setDaysDelayed(Integer daysDelayed) {
         this.daysDelayed = daysDelayed;
     }
 
+    public BigDecimal getCalculatedPenalty() {
+        return calculatedPenalty;
+    }
+
     public void setCalculatedPenalty(BigDecimal calculatedPenalty) {
         this.calculatedPenalty = calculatedPenalty;
     }
 
-    public void setCalculatedAt(Instant calculatedAt) {
+    public BreachRule getAppliedRule() {
+        return appliedRule;
+    }
+
+    public void setAppliedRule(BreachRule appliedRule) {
+        this.appliedRule = appliedRule;
+    }
+
+    public LocalDateTime getCalculatedAt() {
+        return calculatedAt;
+    }
+
+    public void setCalculatedAt(LocalDateTime calculatedAt) {
         this.calculatedAt = calculatedAt;
+    }
+
+    public static Builder builder() { return new Builder(); }
+
+    public static class Builder {
+        private Long id;
+        private Contract contract;
+        private Integer daysDelayed;
+        private java.math.BigDecimal calculatedPenalty;
+        private BreachRule appliedRule;
+
+        public Builder id(Long id) { this.id = id; return this; }
+        public Builder contract(Contract contract) { this.contract = contract; return this; }
+        public Builder daysDelayed(Integer daysDelayed) { this.daysDelayed = daysDelayed; return this; }
+        public Builder calculatedPenalty(java.math.BigDecimal calculatedPenalty) { this.calculatedPenalty = calculatedPenalty; return this; }
+        public Builder appliedRule(BreachRule appliedRule) { this.appliedRule = appliedRule; return this; }
+
+        public PenaltyCalculation build() {
+            PenaltyCalculation p = new PenaltyCalculation();
+            p.setId(this.id);
+            p.setContract(this.contract);
+            p.setDaysDelayed(this.daysDelayed);
+            p.setCalculatedPenalty(this.calculatedPenalty);
+            p.setAppliedRule(this.appliedRule);
+            return p;
+        }
     }
 }
