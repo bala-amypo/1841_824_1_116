@@ -18,20 +18,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
 
-    // 🔐 Authentication Manager
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
             throws Exception {
         return config.getAuthenticationManager();
     }
 
-    // 🔒 Password Encoder
+    
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // 🔑 JWT Filter Bean
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter(
             JwtTokenProvider tokenProvider,
@@ -40,7 +38,6 @@ public class SecurityConfig {
         return new JwtAuthenticationFilter(tokenProvider, customUserDetailsService);
     }
 
-    // 🛡️ Security Filter Chain
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    JwtAuthenticationFilter jwtFilter)
