@@ -26,7 +26,7 @@ public class OpenApiConfig {
 
         return new OpenAPI()
                 .servers(List.of(
-                        new Server().url("https://9018.32procr.amypo.ai/")
+                        new Server().url("https://9045.32procr.amypo.ai")
                 ))
                 // Register security scheme
                 .components(new Components()
