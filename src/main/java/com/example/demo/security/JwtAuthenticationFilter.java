@@ -14,7 +14,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenProvider tokenProvider;
     private final CustomUserDetailsService customUserDetailsService;
 
-    // ✅ REQUIRED constructor
+    
     public JwtAuthenticationFilter(
             JwtTokenProvider tokenProvider,
             CustomUserDetailsService customUserDetailsService
