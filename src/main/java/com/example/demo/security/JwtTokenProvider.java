@@ -1,4 +1,4 @@
-JwtTokenProviderpackage com.example.demo.security;
+package com.example.demo.security;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
