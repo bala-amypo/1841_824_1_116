@@ -11,6 +11,18 @@ import java.io.IOException;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+    private final JwtTokenProvider tokenProvider;
+    private final CustomUserDetailsService customUserDetailsService;
+
+    // ✅ REQUIRED constructor
+    public JwtAuthenticationFilter(
+            JwtTokenProvider tokenProvider,
+            CustomUserDetailsService customUserDetailsService
+    ) {
+        this.tokenProvider = tokenProvider;
+        this.customUserDetailsService = customUserDetailsService;
+    }
+
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
@@ -18,7 +30,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
 
-        // For now, just continue the request
+        // (JWT logic will go here later)
+
         filterChain.doFilter(request, response);
     }
 }
